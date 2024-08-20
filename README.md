@@ -1,5 +1,5 @@
 # TO-DO:
-  - the project still can't do anything
   - study evdev
   - study asyncio
-  - study bash for automation 
+  - need something else rather than if else statement
+  - opens programs and website links
