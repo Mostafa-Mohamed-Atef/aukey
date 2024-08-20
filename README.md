@@ -1,5 +1,5 @@
 # TO-DO:
   - study evdev
   - study asyncio
-  - need something else rather than if else statement
   - opens programs and website links
+  - opens multiple programs and constantly listen
