@@ -1,6 +1,7 @@
 import subprocess
 import keyboard
 import json
+import platform
 
 # Load key paths from JSON file
 with open('paths.json', 'r') as file:
@@ -9,10 +10,22 @@ with open('paths.json', 'r') as file:
 # Create a dictionary from shortcuts for easy lookup
 shortcut_dict = {item["shortcut"]: item for item in shortcuts}
 
+
+def linux(details):
+    subprocess.run(["xdg-open", details["path"]])  
+
+def windows(details):
+    subprocess.run(["start", details["path"]])  
+
+os = {
+    'Linux': linux,
+    'Windows': windows
+}
+
 def main():
     # Track pressed keys
     pressed_keys = ""
-
+    os_function = os.get(platform.system(), lambda details: print(f"{platform.system()} is unsupported"))
     def on_key_event(event):
         nonlocal pressed_keys
 
@@ -23,7 +36,8 @@ def main():
             for shortcut, details in shortcut_dict.items():
                 if pressed_keys.endswith(shortcut):
                     print(f'\nThe {details["name"]} is opening, please wait...')
-                    subprocess.run(["xdg-open", details["path"]])
+                    # subprocess.run(["xdg-open", details["path"]])
+                    os_function(details)
                     pressed_keys = ""  # Clear keys after action
                     print("Listening... To exit press 'esc'")
                     return  # Exit after handling one shortcut
