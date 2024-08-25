@@ -7,7 +7,7 @@ with open('paths.json', 'r') as file:
     shortcuts = json.load(file)
 
 # Create a dictionary from shortcuts for easy lookup
-shortcut_dict = {item["shortcut"]: item["path"] for item in shortcuts}
+shortcut_dict = {item["shortcut"]: item for item in shortcuts}
 
 def main():
     # Track pressed keys
@@ -20,13 +20,13 @@ def main():
             pressed_keys += event.name
         elif event.event_type == keyboard.KEY_UP:
             # Check if the pressed_keys combination matches any shortcut
-            match = next((key for key in shortcut_dict if key in pressed_keys), None)
-            # if pressed_keys in shortcut_dict:
-            if match:
-                print('\nThe file is opening, please wait...')
-                subprocess.run(["xdg-open", shortcut_dict[match]])
-                pressed_keys = ""  # Clear keys after action
-                print("Listening...To exit press 'esc'\n")
+            for shortcut, details in shortcut_dict.items():
+                if pressed_keys.endswith(shortcut):
+                    print(f'\nThe {details["name"]} is opening, please wait...')
+                    subprocess.run(["xdg-open", details["path"]])
+                    pressed_keys = ""  # Clear keys after action
+                    print("Listening... To exit press 'esc'")
+                    return  # Exit after handling one shortcut
 
     print("Listening...")
     keyboard.hook(on_key_event)
