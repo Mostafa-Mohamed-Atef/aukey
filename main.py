@@ -17,9 +17,13 @@ def linux(details):
 def windows(details):
     subprocess.run(["start", details["path"]])  
 
+def mac(details):
+    subprocess.run(["open", details["path"]])
+
 os = {
     'Linux': linux,
-    'Windows': windows
+    'Windows': windows,
+    'Darwin': mac
 }
 
 def main():
