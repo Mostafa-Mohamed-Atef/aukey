@@ -1,36 +1,36 @@
 import subprocess
-import evdev
+import keyboard
 import json
 
-#for listening to keyboard
+# Load key paths from JSON file
 with open('paths.json', 'r') as file:
-    data = json.load(file)
+    shortcuts = json.load(file)
 
-device_path = data.get("keyboard")
+# Create a dictionary from shortcuts for easy lookup
+shortcut_dict = {item["shortcut"]: item["path"] for item in shortcuts}
 
-def Linux():
-    try:
-        device = evdev.InputDevice(device_path) #device python will listen to
-    except FileNotFoundError:
-        print(f"Device not found: {device_path}")
-        exit(1)
+def main():
+    # Track pressed keys
+    pressed_keys = ""
 
-    print("Listening...")
+    def on_key_event(event):
+        nonlocal pressed_keys
 
-
-
-    x= ""
-    for event in device.read_loop(): #for listening for event
-        if event.type == evdev.ecodes.EV_KEY:
-            key_event = evdev.categorize(event) # Only print on key press, not release
-            if key_event.event.value == 0:
-                x += str(key_event.event.code) #alt+f+f , alt+e+e for Downloads
-                print(x)
-            match = next((key for key in data if key in x), None)
+        if event.event_type == keyboard.KEY_DOWN:
+            pressed_keys += event.name
+        elif event.event_type == keyboard.KEY_UP:
+            # Check if the pressed_keys combination matches any shortcut
+            match = next((key for key in shortcut_dict if key in pressed_keys), None)
+            # if pressed_keys in shortcut_dict:
             if match:
-                print('the file is opening please wait...')
-                subprocess.run(["xdg-open", data[match]])
-                x= ""
+                print('The file is opening, please wait...')
+                subprocess.run(["xdg-open", shortcut_dict[match]])
+                pressed_keys = ""  # Clear keys after action
                 print("Listening...")
 
-Linux()
+    print("Listening...")
+    keyboard.hook(on_key_event)
+    keyboard.wait('esc')  # Use 'esc' to exit the script
+
+if __name__ == "__main__":
+    main()
