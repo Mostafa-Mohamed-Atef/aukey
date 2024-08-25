@@ -23,10 +23,10 @@ def main():
             match = next((key for key in shortcut_dict if key in pressed_keys), None)
             # if pressed_keys in shortcut_dict:
             if match:
-                print('The file is opening, please wait...')
+                print('\nThe file is opening, please wait...')
                 subprocess.run(["xdg-open", shortcut_dict[match]])
                 pressed_keys = ""  # Clear keys after action
-                print("Listening...")
+                print("Listening...To exit press 'esc'\n")
 
     print("Listening...")
     keyboard.hook(on_key_event)
