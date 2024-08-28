@@ -17,28 +17,28 @@ pip install aukey
 ```
 ## Usage
 Basic Setup
-Import the package:
+ 1. Import the package:
+  
+  ```python
+  import aukey
+  ```
+ 2. Create your shortcuts configuration:
 
-```python
-import aukey
-```
-Create your shortcuts configuration:
+  You can define your shortcuts directly in the code or use an external JSON file.
+  Example configuration:
+  
+  ```python
+  shortcuts = [
+      {"name": "Open Notepad", "shortcut": "ctrlaltn", "type": "program", "path": "notepad.exe"},
+      {"name": "Open Google", "shortcut": "ctrlaltg", "type": "website", "path": "https://www.google.com"},
+      {"name": "Open a Document", "shortcut": "ctrlaltd", "type": "file", "path": "C:/path/to/document.docx"},
+  ]
+  ```
+ 3. Start listening for shortcuts:
 
-You can define your shortcuts directly in the code or use an external JSON file.
-Example configuration:
-
-```python
-shortcuts = [
-    {"name": "Open Notepad", "shortcut": "ctrlaltn", "type": "program", "path": "notepad.exe"},
-    {"name": "Open Google", "shortcut": "ctrlaltg", "type": "website", "path": "https://www.google.com"},
-    {"name": "Open a Document", "shortcut": "ctrlaltd", "type": "file", "path": "C:/path/to/document.docx"},
-]
-```
-Start listening for shortcuts:
-
-```python
-aukey.start_listening(shortcuts)
-```
+  ```python
+  aukey.start_listening(shortcuts)
+  ```
 Using a JSON Configuration File
 You can also load the configuration from a JSON file:
 
@@ -51,23 +51,18 @@ Create a JSON file with the following structure:
     {"name": "Open a Document", "shortcut": "ctrlaltd", "type": "file", "path": "C:/path/to/document.docx"}
 ]
 ```
-Load the JSON file:
-
-```python
-aukey.load_config_from_file("shortcuts.json")
-```
 Start listening for shortcuts:
 
 ```python
-aukey.start_listening()
+aukey.start_listening("shortcuts.json")
 ```
-Configuration Details
+## Configuration Details
 Each shortcut in the configuration must include the following keys:
 
-name: A descriptive name for the action.
-shortcut: The keyboard shortcut combination (e.g., ctrlaltg).
-type: The type of action (program, file, or website).
-path: The path to the program, file, or URL.
+ - name: A descriptive name for the action.
+ - shortcut: The keyboard shortcut combination (e.g., ctrlaltg).
+ - type: The type of action (program, file, or website).
+ - path: The path to the program, file, or URL.
 Example Configuration
 
 ```python
