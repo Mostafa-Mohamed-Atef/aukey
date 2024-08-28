@@ -83,6 +83,8 @@ shortcuts = [
  ```
  - ### Avoid Common Shortcuts: Do not use shortcuts that are already widely used by the system or applications, such as Ctrl+C, Ctrl+V, Ctrl+Z, etc. Using these might interfere with standard operations and cause unexpected behavior.
 
+ - ### on linux you need to run sudo python 
+
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue on GitHub.
 
