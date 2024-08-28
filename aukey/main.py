@@ -45,9 +45,9 @@ def check_shortcut(shortcut_dict: Dict, os_function: Callable):
         if keys_joined.endswith(shortcut):
             print(f'\nThe {details["name"]} is opening, please wait...')
             os_function(details)
-            pressed_keys = []  # Clear keys after action
+            pressed_keys = []  
             print("Listening... To exit press 'esc'")
-            return  # Exit after handling one shortcut
+            return  
 
 def linux(details):
     subprocess.run(["xdg-open", details["path"]])
@@ -72,4 +72,4 @@ def start_listening(config_file: str):
 
     print("Listening....")
     keyboard.hook(on_key_event)
-    keyboard.wait('esc')  # Use 'esc' to exit the script
+    keyboard.wait('esc') 
