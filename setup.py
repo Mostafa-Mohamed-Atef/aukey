@@ -9,7 +9,7 @@ setup(
     name='aukey',
     packages=find_packages(include=['aukey', 'aukey.*']),
     version='0.1.0',
-    install_requires=['platform', 'json', 'subprocess', 'typing', 'keyboard'],
+    install_requires=['keyboard'],
     license="MIT license",
     long_description=readme,
     long_description_content_type='text/markdown',
