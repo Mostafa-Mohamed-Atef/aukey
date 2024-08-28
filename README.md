@@ -12,8 +12,8 @@
 ## Installation
 You can install aukey directly from PyPI using pip:
 
-```bash
 Copy code
+```bash
 pip install aukey
 ```
 ## Usage
