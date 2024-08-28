@@ -1,5 +1,5 @@
 # aukey
-**aukey** is a Python package designed to execute programs, files, and websites using customizable keyboard shortcuts. This package allows users to define shortcuts and associate them with specific actions, enabling quick and efficient access to frequently used resources.
+**aukey** is a Python package designed to execute programs, files, and websites using customizable keyboard shortcuts.
 
 ## Features
  - Custom Shortcuts: Define custom keyboard shortcuts to execute programs, open files, or visit websites.
@@ -34,15 +34,10 @@ shortcuts = [
     {"name": "Open a Document", "shortcut": "ctrlaltd", "type": "file", "path": "C:/path/to/document.docx"},
 ]
 ```
-Load the configuration:
-
-```python
-aukey.load_config(shortcuts)
-```
 Start listening for shortcuts:
 
 ```python
-aukey.start_listening()
+aukey.start_listening(shortcuts)
 ```
 Using a JSON Configuration File
 You can also load the configuration from a JSON file:
