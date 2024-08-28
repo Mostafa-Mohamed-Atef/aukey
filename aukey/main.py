@@ -53,7 +53,7 @@ def linux(details):
     subprocess.run(["xdg-open", details["path"]])
 
 def windows(details):
-    subprocess.run(["start", details["path"]])
+    subprocess.run(f'start "" "{details["path"]}"', shell=True)
 
 def mac(details):
     subprocess.run(["open", details["path"]])
