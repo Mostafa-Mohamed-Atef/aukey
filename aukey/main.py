@@ -7,7 +7,7 @@ def main():
     def on_key_event(event):
         manager.handle_key_event(event)
 
-    print("Listening...")
+    print("Listening....")
     keyboard.hook(on_key_event)
     keyboard.wait('esc')  # Use 'esc' to exit the script
 
